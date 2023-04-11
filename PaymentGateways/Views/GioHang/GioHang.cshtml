@@ -51,12 +51,12 @@
 
             @Html.ActionLink("Chỉnh sửa giỏ hàng", "SuaGioHang")
         </td>
-        <td colspan="6" style="text-align:right;color:blue">
+       @* <td colspan="6" style="text-align:right;color:blue">
             @using (Html.BeginForm("ThanhToanDonHang", "GioHang", new { @class = "" }))
             {
                 <input type="submit" value="Đặt hàng" class="btn-danger" />
             }
-        </td>
+        </td>*@
         <td>
             <a href="@Url.Action("CreatePayment", "PayPal")" class="btn btn-success">Payment >></a>
         </td>
