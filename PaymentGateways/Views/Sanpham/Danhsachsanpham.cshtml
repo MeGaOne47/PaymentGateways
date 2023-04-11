@@ -1,0 +1,110 @@
+﻿@model List<PaymentGateways.Models.Sanpham>
+<h1>Danh sách sản phẩm nước hoa</h1>
+<style>
+    h1 {
+        text-align: center;
+    }
+    /*Display Product*/
+    .product-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0 -10px;
+    }
+
+    .product-box {
+        width: calc(33.33% - 20px);
+        margin: 0 10px 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+        .product-box img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product-box h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .product-box p {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .product-box .price {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #f00;
+        }
+
+    /*Display Pagination*/
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 8px 16px;
+            text-decoration: none;
+            margin: 0 4px;
+            border-radius: 4px;
+        }
+
+            .pagination a:hover {
+                background-color: #ddd;
+            }
+
+        .pagination span {
+            background-color: #333;
+            color: #fff;
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 4px;
+        }
+</style>
+<!-- Display the list of products -->
+<div class="product-grid">
+    @foreach (var product in Model)
+    {
+        <div class="product-box">
+            <img src="@product.Anhbia" alt="@product.Tensp" />
+            <h2>@product.Tensp</h2>
+            <p class="price">@string.Format("{0:#,##0} VND", product.Giatien)</p>
+            <a href="@Url.Action("xemchitiet", new { Masp = product.Masp })">View details</a>
+        </div>
+    }
+</div>
+
+<!-- Display pagination links -->
+@if (ViewBag.TotalPages > 1)
+{
+    <div class="pagination">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Danhsachsanpham", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+        }
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            if (i == ViewBag.CurrentPage)
+            {
+                <span>@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Danhsachsanpham", new { page = i })">@i</a>
+            }
+        }
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Danhsachsanpham", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+        }
+    </div>
+}

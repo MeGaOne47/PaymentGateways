@@ -1,0 +1,46 @@
+﻿@model PaymentGateways.Models.Sanpham
+<script src="~/Content/ckfinder/ckfinder.js"></script>
+@{
+    ViewBag.Title = "PaymentGateways";
+
+}
+
+<br />
+<div class="form-group">
+    @Html.LabelFor(model => model.Anhbia, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Anhbia, new { htmlAttributes = new { @class = "form-control" } })
+        <button id="chonDuongDanAnh" type="button" class="btn btn-info"><i class="fas fa-image font-size-20"></i>Upload file</button>
+        @Html.ValidationMessageFor(model => model.Anhbia, "", new { @class = "text-danger" })
+    </div>
+</div>
+<br />
+<div class="danhmuc">
+    @Html.Action("DanhmucPartial", "Danhmuc")
+</div>
+<div class="nh">
+
+    @Html.Action("nhchanelpartial", "Sanpham")
+</div>
+<div class="nh">
+
+    @Html.Action("nhdiorpartial", "Sanpham")
+</div>
+
+<div class="nh">
+
+    @Html.Action("nhguccipartial", "Sanpham")
+</div>
+
+
+<script language="javascrip" type="text/javascript">
+    $(function () {
+        $("#chonDuongDanAnh").click(function () {
+            var ckfiner = new CKFinder();
+            ckfiner.selectActionFunction = function (fileUrl) {
+                $("#Anhbia").val(fileUrl);
+            };
+            ckfiner.popup();
+        })
+    });
+</script>
